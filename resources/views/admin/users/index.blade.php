@@ -1,7 +1,7 @@
 @extends('layouts.app-admin-layouts')
 
 @section('title')
-    Roles
+    Users
 @endsection
 
 {{$count =1}}
@@ -14,7 +14,7 @@
                 <div class="widget-header">
                     <div class="row">
                         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                            <h4>Roles list</h4>
+                            <h4>Users list</h4>
                         </div>
                     </div>
                 </div>
@@ -25,30 +25,26 @@
                                 <tr>
                                     <th class="checkbox-column text-center"> Record Id </th>
                                     <th class="">Name</th>
-                                    <th class="checkbox-column text-center">Permission</th>
+                                    <th class="checkbox-column text-center">Role</th>
                                     <th class="checkbox-column text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 
-                                @foreach ($roles as $role)
+                                @foreach ($users as $user)
                                     
                                     <tr>
                                         <td class="text-center"> {{$count}} </td>
-                                        <td>{{$role -> name}}</td>
+                                        <td>{{$user -> name}}</td>
                                         <td class="checkbox-column text-center">
-                                            @forelse ($role->permissions as $rp)
-                                                <span class="shadow-none badge badge-primary">{{$rp -> name}}</span>
-                                            @empty
-                                                <span class="shadow-none badge badge-warning">No Permission</span>
-                                            @endforelse
+                                            <span class="shadow-none badge badge-primary">{{$user -> role -> name}}</span>
                                         </td>
                                         <td class="text-center">
                                             <ul class="table-controls">
-                                                <li><a href="{{route('admin.roles.edit', $role ->id)}}" class="bs-tooltip" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 p-1 br-6 mb-1"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a></li>
+                                                <li><a href="{{route('admin.users.edit', $user ->id)}}" class="bs-tooltip" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 p-1 br-6 mb-1"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a></li>
                                                 <li><div class="">
                                                     <form method="POST" 
-                                                        action="{{route('admin.roles.destroy',$role->id)}}"
+                                                        action="{{route('admin.users.destroy',$user->id)}}"
                                                         onclick="return confirm('Are you sure ?');">
                                                             @csrf
                                                             @method('DELETE')

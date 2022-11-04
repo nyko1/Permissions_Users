@@ -53,12 +53,16 @@
                     <div class="table-responsive mb-4 ">
                         <form method="POST" action="{{route('admin.roles.permissions', $role->id)}}">
                             @csrf
-                            <select name="permissions[]" class="form-select" id="">
-                                @foreach ($permissions as $permission)
-                                    <option value="{{$permission->id}}" @selected($role->hasPermission($permission->name))>{{$permission->name}}</option>
-                                @endforeach
-                            </select>
+                            <div class="form-group">
+                                <select name="permissions[]" class="form-control col-lg-4" id="UserPermission" multiple>
+                                    @foreach ($permissions as $permission)
+                                        <option value="{{$permission->id}}" @selected($role->hasPermission($permission->name))>{{$permission->name}}</option>
+                                    @endforeach
+                                </select>
+
+                              <small id="UserPermission" class="form-text text-muted">Select User Permissions.</small>
                             </div>
+                             
                             <a href="{{route('admin.permissions.index')}}" class="btn btn-warning">Cancel</a>
                             <button type="submit" class="btn btn-primary">Assign Permission</button>
                         </form>

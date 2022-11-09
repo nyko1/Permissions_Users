@@ -63,7 +63,9 @@ class PostPolicy
     public function update(User $user, Post $post)
     {
         //Autoriser seul les users qui ont la permission edit à modifier des posts
-        //return $user -> role -> hasPermission('edit');
+       return $user -> role -> hasPermission('edit');
+        //return $user -> role -> hasPermission('edit') === $post->user_id;
+        
 
     }
 
@@ -77,7 +79,7 @@ class PostPolicy
     public function delete(User $user, Post $post)
     {
         ////Autoriser seul les users qui ont la permission delete à creer des posts
-       //return $user -> role -> hasPermission('delete');
+       return $user -> role -> hasPermission('delete');
 
     }
 

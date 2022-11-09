@@ -4,7 +4,6 @@
     Roles
 @endsection
 
-{{$count =1}}
 @section('contenu')
     <!--  BEGIN CONTENT AREA  -->
 
@@ -31,10 +30,10 @@
                             </thead>
                             <tbody>
                                 
-                                @foreach ($roles as $role)
+                                @foreach ($roles->sortDesc() as $role)
                                     
                                     <tr>
-                                        <td class="text-center"> {{$count}} </td>
+                                        <td class="text-center"> {{$loop->iteration}} </td>
                                         <td>{{$role -> name}}</td>
                                         <td class="checkbox-column text-center">
                                             @forelse ($role->permissions as $rp)
@@ -61,7 +60,6 @@
                                             </ul>
                                         </td>
                                     </tr> 
-                                    {{$count+=1}}
                                 @endforeach
                                 
                             </tbody>

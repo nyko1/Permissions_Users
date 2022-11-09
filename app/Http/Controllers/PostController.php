@@ -22,7 +22,7 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        $this -> authorize('create', Post::class);
+        //$this -> authorize('create', Post::class);
 
         $validated = $request -> validate(['title'=>'required', 'body'=>'required']);
         Post::create($validated);
@@ -32,14 +32,14 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
-        $this -> authorize('update', Post::class);
+        $this -> authorize('update', $post);
 
         return view('posts.edit',compact('post'));
     }
 
     public function update(Request $request, Post $post)
     {
-        $this -> authorize('update', Post::class);
+        //$this -> authorize('update', Post::class);
 
         $validate = $request -> validate(['title'=>'required', 'body'=>'required']);
         $post->update($validate);
@@ -48,7 +48,7 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
-        $this -> authorize('delete', Post::class);
+        $this -> authorize('delete', $post);
 
         $post->delete();
 

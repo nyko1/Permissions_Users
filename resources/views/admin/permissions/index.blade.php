@@ -29,11 +29,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{$count =0}}
+                               
                                 @foreach ($permissions as $permission)
-                                {{$count+=1}}
+                                
                                 <tr>
-                                    <td class="checkbox-column text-center"> {{$count}} </td>
+                                    <td class="checkbox-column text-center"> {{$loop->iteration}} </td>
                                     <td>{{$permission -> name}}</td>
                                     <td class="text-center">
                                         <ul class="table-controls">

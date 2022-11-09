@@ -76,9 +76,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($posts as $post)
+                                {{-- Afficher par ordre décroissant en partant du dernier post --}}
+                                @foreach ($posts->sortDesc() as $post) 
                                     <tr>
-                                        <td>{{ $post->id }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>{{ $post->title }}</td>
                                         <td>{{ $post->body }}</td>
                                         {{-- <td class="text-center"><span class="badge badge-success">Approved</span></td> --}}
@@ -93,11 +94,22 @@
                                                     @can('create', App\Models\Post::class)
                                                         <a class="dropdown-item" href="{{ route('posts.create') }}">Add</a>
                                                     @endcan
-                                                    @can('update', App\Models\Post::class)
+                                                    @can('update', $post)
                                                         <a class="dropdown-item" href="{{ route('posts.edit',$post ->id) }}">Edit</a>
                                                     @endcan
-                                                    @can('delete', App\Models\Post::class)
-                                                        <a class="dropdown-item" href="{{ route('posts.destroy',$post ->id) }}">Delete</a>
+                                                    @can('delete', $post)
+                                                        <div class="">
+                                                            <form method="POST" 
+                                                                action="{{ route('posts.destroy',$post ->id) }}"
+                                                                onclick="return confirm('Are you sure ?');">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <a href=""
+                                                                        onclick="event.preventDefault();
+                                                                        this.closest('form').submit();" class="dropdown-item">Delete
+                                                                    </a>
+                                                            </form>
+                                                        </div>
                                                     @endcan
                                                 </div>
                                             </div>

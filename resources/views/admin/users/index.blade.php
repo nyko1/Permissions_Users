@@ -31,10 +31,10 @@
                             </thead>
                             <tbody>
                                 
-                                @foreach ($users as $user)
+                                @foreach ($users->sortDesc() as $user)
                                     
                                     <tr>
-                                        <td class="text-center"> {{$count}} </td>
+                                        <td class="text-center"> {{$loop->iteration}} </td>
                                         <td>{{$user -> name}}</td>
                                         <td class="checkbox-column text-center">
                                             <span class="shadow-none badge badge-primary">{{$user -> role -> name}}</span>
@@ -57,7 +57,6 @@
                                             </ul>
                                         </td>
                                     </tr> 
-                                    {{$count+=1}}
                                 @endforeach
                                 
                             </tbody>
